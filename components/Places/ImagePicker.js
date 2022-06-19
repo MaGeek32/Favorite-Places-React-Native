@@ -3,7 +3,7 @@ import { launchCameraAsync, useCameraPermissions, PermissionStatus } from "expo-
 import { useState } from "react"
 import { Colors } from "../../constants/colors"
 import OutlinedButton from "../UI/OutlinedButton"
-function ImagePicker () {
+function ImagePicker ({ onTakeImage }) {
 
   const [pickedImage, setPickedImage] = useState()
 
@@ -33,6 +33,7 @@ function ImagePicker () {
       quality: 0.5,
     })
     setPickedImage(image.uri)
+    onTakeImage(image.uri)
   }
 
   let imagePreview = <Text>No image taken yet.</Text>
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Colors.primary100,
     borderRadius: 4,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
